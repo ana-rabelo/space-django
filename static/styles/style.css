@@ -102,6 +102,7 @@ table {
 }
 
 .busca__input {
+    color: white;
     align-items: center;
     background-color: transparent;
     border: none;
