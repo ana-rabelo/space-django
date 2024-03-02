@@ -9,7 +9,8 @@ def index(request):
 
     save_new_images(total_imagens_salvas) 
    
-    fotografias = Fotografia.objects.all()    
+    fotografias = Fotografia.objects.order_by('data_criacao').filter(publicada=True) 
+
     return render(request, 'galeria/index.html', {"cards": fotografias})
 
 def imagem(request, foto_id):
