@@ -108,14 +108,36 @@ table {
     border: none;
     font-size: 1rem;
     height: 24px;
-    padding: 10px;
-    width: 500px;
+    width: calc(100% - 40px); /* Ajuste da largura para que seja igual à largura do contêiner - a largura do botão */
+    margin-right: 10px; /* Adicionando uma margem à direita para separar o input do botão */
+
+}
+
+.form__input{
+    background-color: transparent;
+    height: 44px;
+    width: 520px;
 }
 
 .busca__icone {
     cursor: pointer;
+    align-items: center;
     width: 2rem;
     height: 2rem;
+}
+
+.button__busca{
+    background-color: transparent;
+    border-radius: 10px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    height: 40px;
+    width: 40px;
+    
+
 }
 
 .cards {

@@ -29,6 +29,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
+
 body {
     line-height: 1;
     font-family: 'Space Grotesk', sans-serif;
@@ -38,6 +39,7 @@ body {
     background-position: center;
     background-size: cover;
 }
+
 ol, ul {
     list-style: none;
 }
@@ -92,6 +94,20 @@ table {
     width: auto; 
 }
 
+ 
+.form__input{
+    align-items: center;
+    background-color: transparent;
+    height: 44px;
+    width: 520px;
+    display: flex;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.form__input:focus-visible{
+    outline: -webkit-focus-ring-color auto 1px;
+}
+
 .busca__fundo {
     align-items: center;
     background-color: #041A37;
@@ -105,18 +121,38 @@ table {
     color: white;
     align-items: center;
     background-color: transparent;
+    border-radius: 8px;
     border: none;
     font-size: 1rem;
     height: 24px;
     padding: 10px;
-    width: 500px;
+    -webkit-tap-highlight-color: transparent;
+    width: calc(100% - 60px); /* Ajuste da largura para que seja igual à largura do contêiner - a largura do botão */
 }
 
 .busca__icone {
+    align-items: center;
     cursor: pointer;
     width: 2rem;
     height: 2rem;
 }
+
+
+.button__busca{
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: transparent;
+    cursor: pointer;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    height: 44px;
+    width: 40px;
+    display: flex;
+    justify-content: center; 
+    margin-right: 1px; 
+}  
+
 
 .cards {
     width: 100%;
@@ -384,4 +420,158 @@ table {
 .tags__tag:hover {
     border: 2px solid #7B78E5;
     cursor: pointer;
+}
+
+@media only screen and (min-width: 416px) and (max-width: 960px) {
+    /* Tablet styles */
+    body{
+        background-repeat: repeat;
+    }
+
+    .form__input{
+        width: 400px;
+    }
+
+    .menu-lateral {
+        padding-right: 0px;
+    }
+
+    .menu-lateral__navegacao {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .menu-lateral__navegacao img{
+        margin-right: 0.8rem;
+    }
+
+    .principal {
+        flex-direction: column;
+    }
+
+    .card{
+        width: 720px;
+    }
+
+    .card__tag {
+        left: 400px;
+    }
+
+    .cards__lista{
+        justify-content: center;
+    }
+    
+    .card__imagem {
+        width: 100%;
+    }
+
+    .rodape {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rodape__icones {
+        margin-top: 1rem;
+    }
+
+    .tags {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tags__titulo {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .tags__lista {
+        flex-wrap: wrap;
+    }
+
+    .banner__titulo {
+        font-size: 40px;
+        width: 400px;
+        top: 25px;
+        left: 30px;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    /* Mobile styles */
+    body{
+        background-repeat: repeat;
+    }
+
+    .banner__imagem {
+        width: 135%;
+    }
+
+    .principal {
+        flex-direction: column;
+    }
+
+    .form__input{
+        width: 210px;
+    }
+
+    .menu-lateral{
+        padding-right: 0rem;
+        min-width: 465px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .menu-lateral__navegacao{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .menu-lateral__navegacao a {
+        font-size: 0;
+    }
+
+    .menu-lateral__navegacao a img {
+        width: 40px;
+    }
+
+    .populares__imagens {
+        flex-direction: column;
+    }
+
+    .populares__imagem {
+        width: 100%;
+    }
+
+    .tags {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tags__tag {
+        width: auto;
+        margin-bottom: 1rem;
+    }
+
+    .banner__titulo {
+        font-size: 25px;
+        width: 300px;
+        top: 15px;
+        left: 30px;
+    }
+
+    .cabecalho__busca {
+        width: 70%;
+    }
+
+    .cabecalho{
+        margin: 1.5rem 0 2rem 0;
+    }
+
+    .tags__titulo {
+        margin-bottom: 1rem;
+    }
+
+    .rodape{
+        width: 130%;
+    }
 }
