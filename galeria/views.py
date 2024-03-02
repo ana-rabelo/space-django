@@ -1,10 +1,10 @@
+import os
 import requests
 from django.shortcuts import get_object_or_404, render
 
 from galeria.models import Fotografia
 
 def index(request):
-    
     total_imagens_salvas = Fotografia.objects.count()
 
     save_new_images(total_imagens_salvas) 
@@ -17,26 +17,51 @@ def imagem(request, foto_id):
     item = get_object_or_404(Fotografia, pk=foto_id)
     return render(request, 'galeria/imagem.html', {"item": item})
 
-def save_new_images(total_imagens_salvas):
-    if total_imagens_salvas < 6:
-        api_url = "https://api.nasa.gov/planetary/apod"
+def buscar(request):
+    fotografias = Fotografia.objects.order_by('data_criacao').filter(publicada=True) 
 
-        api_key = "DEMO_KEY"
-        params = {"api_key": api_key, 
-                    "count": 6}
+    if "buscar" in request.GET:
+        nome = request.GET["buscar"]
+        fotografias = fotografias.filter(descricao__icontains=nome)
+
+    return render(request, 'galeria/buscar.html', {"cards": fotografias})
+
+def save_new_images(total_imagens_salvas):
+    """
+    Busca novas imagens da API APOD da NASA e as salva no banco de dados.
+
+    Args:
+        total_imagens_salvas (int): O número total de imagens já salvas no banco de dados.
+
+    Returns:
+        None
+    """
+
+    if total_imagens_salvas < 16:
+        #captura de dados da API APOD da NASA
+        api_url = "https://api.nasa.gov/planetary/apod"
+        API_KEY = str(os.getenv('API_KEY'))
+        #count = 6 para garantir que sempre teremos 6 imagens na galeria
+        params = {"api_key": API_KEY, 
+                  "count": 6}
         response = requests.get(api_url, params=params)
 
         dados = response.json()
                 
+        #salva os dados no banco de dados
         for item in dados:
-            if not Fotografia.objects.filter(nome=item["title"]).exists():
+            #verifica se a o objeto já foi salvo e se é uma imagem
+            if not Fotografia.objects.filter(nome=item["title"]).exists() and item["media_type"] == "image":
                 titulo = item["title"]
+                #
                 legenda = f"{item.get('copyright', 'Desconhecido')} / {item['date']}"
                 descricao = item["explanation"]
                 foto = item['url']
 
+                #Para determinar a categoria de cada imagem, checa se a descrição contém palavras-chave
                 categorias = {"galaxy": "GALÁXIA", 
-                              "star": "ESTRELA", 
+                              "star": "ESTRELA",
+                              "sun": "ESTRELA", 
                               "planet": "PLANETA", 
                               "nebula": "NEBULOSA",
                               "mercury": "PLANETA",
@@ -49,12 +74,18 @@ def save_new_images(total_imagens_salvas):
                               "neptune": "PLANETA",
                               "pluto": "PLANETA"}
                 
+                #Se nenhuma palavra-chave for encontrada, a categoria é definida como "OUTRO"
                 categoria = "OUTRO"
 
+                #Checa cada palavra da descrição até encontrar uma das palavras-chave
                 for word in descricao.split():
                     if word.lower() in categorias.keys():
                         categoria = categorias[word.lower()]
+                        #Se uma palavra-chave for encontrada, define a categoria e a busca é encerrada
                         break
 
-            fotografia = Fotografia(nome=titulo, legenda=legenda, descricao=descricao, foto=foto, categoria=categoria)
+            #Salva a imagem no banco de dados
+            fotografia = Fotografia(nome=titulo, legenda=legenda, 
+                                    descricao=descricao, foto=foto, 
+                                    categoria=categoria, publicada=True)
             fotografia.save()

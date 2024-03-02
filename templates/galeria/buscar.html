@@ -1,12 +1,3 @@
-<!-- TODO: 
-1. Mudar cor da fonte da barra de pesquisa ✅
-2. Adicionar a página do "Surpreenda-me"
-3. Deixar mais responsivo
-4. Tornar as tags funcionais
-5. Adicionar a página do "Novas"
-6. Adicionar funcionalidade à opção "Mais vistas"
-7. Dar vida à barra de busca ✅
--->
 {% extends 'galeria/base.html' %}
 {% load static %}
 {% block content %}
@@ -48,7 +39,7 @@
                             {% endfor %}
                             {% else %}
                             <div class="imagem__texto">
-                                <p>Galeria vazia</p>
+                                <p>Fotografias não encontradas</p>
                             </div>
                             {% endif %}
                         </ul>
@@ -57,5 +48,4 @@
             </section>
         </main>
     </div>
-    
 {% endblock %}
