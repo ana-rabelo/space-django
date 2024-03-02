@@ -7,6 +7,16 @@ def index(request):
     
     total_imagens_salvas = Fotografia.objects.count()
 
+    save_new_images(total_imagens_salvas) 
+   
+    fotografias = Fotografia.objects.all()    
+    return render(request, 'galeria/index.html', {"cards": fotografias})
+
+def imagem(request, foto_id):
+    item = get_object_or_404(Fotografia, pk=foto_id)
+    return render(request, 'galeria/imagem.html', {"item": item})
+
+def save_new_images(total_imagens_salvas):
     if total_imagens_salvas < 6:
         api_url = "https://api.nasa.gov/planetary/apod"
 
@@ -20,16 +30,30 @@ def index(request):
         for item in dados:
             if not Fotografia.objects.filter(nome=item["title"]).exists():
                 titulo = item["title"]
-                legenda = f"{item.get('copyright', 'Desconhecido')} / {item["date"]}"
+                legenda = f"{item.get('copyright', 'Desconhecido')} / {item['date']}"
                 descricao = item["explanation"]
-                foto = item["url"]
-                
-                fotografia = Fotografia(nome=titulo, legenda=legenda, descricao=descricao, foto=foto)
-                fotografia.save() 
-   
-    fotografias = Fotografia.objects.all()    
-    return render(request, 'galeria/index.html', {"cards": fotografias})
+                foto = item['url']
 
-def imagem(request, foto_id):
-    item = get_object_or_404(Fotografia, pk=foto_id)
-    return render(request, 'galeria/imagem.html', {"item": item})
+                categorias = {"galaxy": "GALÁXIA", 
+                              "star": "ESTRELA", 
+                              "planet": "PLANETA", 
+                              "nebula": "NEBULOSA",
+                              "mercury": "PLANETA",
+                              "venus": "PLANETA",
+                              "earth": "PLANETA",
+                              "mars": "PLANETA",
+                              "jupiter": "PLANETA",
+                              "saturn": "PLANETA",
+                              "uranus": "PLANETA",
+                              "neptune": "PLANETA",
+                              "pluto": "PLANETA"}
+                
+                categoria = "OUTRO"
+
+                for word in descricao.split():
+                    if word.lower() in categorias.keys():
+                        categoria = categorias[word.lower()]
+                        break
+
+            fotografia = Fotografia(nome=titulo, legenda=legenda, descricao=descricao, foto=foto, categoria=categoria)
+            fotografia.save()
