@@ -101,12 +101,12 @@ table {
     height: 44px;
     width: 520px;
     display: flex;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .form__input:focus-visible{
     outline: -webkit-focus-ring-color auto 1px;
 }
+
 
 .busca__fundo {
     align-items: center;
