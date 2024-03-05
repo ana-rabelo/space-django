@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alura Space</title>
+    <link rel="icon" href="{% static '/assets/favicon/Favicon 96px 1.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,29 +18,7 @@
 </head>
 
 <body>
-    <div class="pagina-inicial">
-        <header class="cabecalho">
-            <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
-            <div class="cabecalho__busca">
-                <div class="busca__fundo">
-                    <form action="{% url 'buscar' %}">
-                        <input  class="busca__input" type="text" name="buscar" placeholder="O que você procura?">
-                        <button type="submit">
-                            <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </header>
-        <main class="principal">
-            <section class="menu-lateral">
-                <nav class="menu-lateral__navegacao">
-                    <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
-                    <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Login</a>
-                    <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Cadastrar</a>
-                    <a href="#"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
-                </nav>
-            </section>
+    {% include '../partials/_menu.html' %}
             <section class="galeria" style="margin-left: 5em">
                 <form action="" method="">
                     <div class="row">
@@ -69,4 +48,4 @@
     </div>
 </body>
 
-{% include 'galeria/partials/_footer.html' %}
+{% include '../partials/_footer.html' %}

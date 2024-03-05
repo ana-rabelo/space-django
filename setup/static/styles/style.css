@@ -304,11 +304,6 @@ table {
     font-size: 24px;
 }
 
-.menu-lateral__navegacao a:first-child {
-    font-weight: bold;
-    color: #7B78E5;
-}
-
 .menu-lateral__navegacao img {
     margin-right: 1.5rem;
 }
@@ -574,4 +569,8 @@ table {
     .rodape{
         width: 130%;
     }
+}
+.ativo {
+    font-weight: bold;
+    color: #7B78E5 !important;
 }

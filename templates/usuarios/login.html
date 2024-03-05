@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alura Space</title>
+    <link rel="icon" href="{% static '/assets/favicon/Favicon 96px 1.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,43 +18,17 @@
 </head>
 
 <body>
-    <div class="pagina-inicial">
-        <header class="cabecalho">
-            <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
-            <div class="cabecalho__busca">
-                <div class="busca__fundo">
-                    <form action="{% url 'buscar' %}">
-                        <input  class="busca__input" type="text" name="buscar" placeholder="O que você procura?">
-                        <button type="submit">
-                            <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </header>
-        <main class="principal">
-            <section class="menu-lateral">
-                <nav class="menu-lateral__navegacao">
-                    <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
-                    <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Login</a>
-                    <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Cadastrar</a>
-                    <a href="#"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
-                </nav>
-            </section>
+    {% include '../partials/_menu.html' %}
             <section class="galeria" style="margin-left: 5em">
                 <form action="" method="">
+                    {% csrf_token %} <!-- garantir a segurança das informações -->
                     <div class="row">
-                        <div class="col-12 col-lg-12" style="margin-bottom: 10px;">
-                            <label for="nome_login" style="color:#D9D9D9; margin-bottom: 5px;"><b>Nome de Login</b></label>
-                            <input type="text" class="form-control" name="nome_login" placeholder="Ex.: João Silva" required>
+                        {% for field in form.visible_fields %}
+                        <div>
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
                         </div>
-                        <div class="col-12 col-lg-12" style="margin-bottom: 10px;">
-                            <label for="password" style="color:#D9D9D9; margin-bottom: 5px;"><b>Senha</b></label>
-                            <input type="password" class="form-control" name="password" placeholder="Digite sua senha" required>
-                        </div>
-                        <div class="col-12 text-center">
-                            <button class="btn btn-success col-12" style="padding: top 5px;" type="submit">Login</button>
-                        </div>
+                        {% endfor %}
                     </div>
                 </form>
             </section>
@@ -61,4 +36,4 @@
     </div>
 </body>
 
-{% include 'galeria/partials/_footer.html' %}
+{% include '../partials/_footer.html' %}
