@@ -118,7 +118,7 @@ table {
     border-radius: 18px;
     padding: 8px;
     padding: 10px;
-}
+}   
 
 .input__login:focus{
     outline: #8b62a6 auto 1px;
@@ -145,11 +145,13 @@ table {
     height: 20px;
     background-color: #e6e4e9;
     border-radius: 3px; 
+    border-color:#7B78E5;
     cursor: pointer;
 }
 
 .form-check-input:checked {
-    background-color: #7B78E5; 
+    background-color: #7B78E5;
+    border: none;
 }
 
 .form-check-label {
@@ -199,7 +201,6 @@ table {
 
 .button_login:hover, .button_login:focus, 
 .button_login:active:focus{
-    color: white;
     background: linear-gradient(45deg, #9064ad,#5956a5);
 }
 
