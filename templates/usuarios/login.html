@@ -43,6 +43,12 @@
                     <div>
                         <button type="submit" class="btn col-12 button_login " style="padding: top 5px; margin-top: 40px">Entrar</button>
                     </div>
+                    
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" style="margin-top:30px;">
+                            <p id="messages"> {{ message }}</p>
+                        </div>
+                    {% endfor %}
                 </form>
             </section>
         </main>

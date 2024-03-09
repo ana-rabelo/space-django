@@ -19,8 +19,14 @@
 
 <body>
     {% include '../partials/_menu.html' %}
-            <section class="galeria form_login" style="margin-left: 5em">
+            <section class="galeria form_login" style="margin-left: 5em">                   
+                
                 <form action="{% url 'cadastro' %}" method="POST">
+                    {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" style="margin-top: 30px;">
+                    <p id="messages"> {{ message }}</p>
+                </div>
+                {% endfor %}
                     {% csrf_token %} <!-- garantir a segurança das informações -->
                     <div class="row">
                         {% for field in form.visible_fields %}
