@@ -20,7 +20,7 @@
 <body>
     {% include '../partials/_menu.html' %}
             <section class="galeria form_login" style="margin-left: 5em">
-                <form>
+                <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %} <!-- garantir a segurança das informações -->
                     <div class="row">
                         {% for field in form.visible_fields %}
