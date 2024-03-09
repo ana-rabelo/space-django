@@ -24,6 +24,13 @@ After installing Python and pip, open the terminal and navigate to the project f
 - `python -m virtualenv .venv` to create a virtual environment.
 - `source .venv/bin/activate` to activate the virtual environment.
 - `pip install -r requirements.txt` to install the project dependencies.
+
+Now, we need to create the database. Execute the following commands:
+
+- `python manage.py makemigrations` to create the migration files.
+- `python manage.py migrate` to apply the migrations and create the database.
+
+Finally, we can run the project:
 - `python manage.py runserver` to start the server.
 
 After running the last command, the terminal will display a message with the address where the project is running. Press `Ctrl + Click` on the link to open the website in your browser.
