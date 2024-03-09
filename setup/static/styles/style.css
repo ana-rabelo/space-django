@@ -110,6 +110,7 @@ table {
 .form_login{
     display: flex;
     justify-content: center;
+        
 }
 
 .input__login{
