@@ -30,8 +30,15 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="form-check">
-                        <button class="form-check-input" type="checkbox" id="rememberMe"><label class="check-label" >Lembre de mim</label></button>
+                    <div class="login_opcs">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Lembre de mim</label>
+                        </div>
+
+                        <div class="forgot-password">
+                            <a href="#">Esqueci minha senha</a>
+                        </div>
                     </div>
                     <div>
                         <button type="submit" class="btn col-12 button_login " style="padding: top 5px; margin-top: 40px">Entrar</button>
@@ -40,7 +47,7 @@
             </section>
         </main>
     </div>
-
+    
     {% include '../partials/_footer.html' %}
 </body>
 

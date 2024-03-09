@@ -123,25 +123,53 @@ table {
     outline: #8b62a6 auto 1px;
 }
 
+.login_opcs{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    
+    align-items: center;
+}
+
 .form-check {
-    display: inline-flex;
-    min-height: 24px;
-    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .form-check-input {
-    border-radius: 80%; 
-    background-color: #e6e4e9; 
-    padding: 10px;
-    margin-top: 10px;
-    align-items: center;
-    display: flex;
-    flex: none;
-    height: 16px;
-    justify-content: center;
-    position: relative;
-    
+    margin: 0; 
+    margin-right: 0.5rem;
+    appearance: none; 
+    width: 20px;
+    height: 20px;
+    background-color: #e6e4e9;
+    border-radius: 3px; 
+    cursor: pointer;
 }
+
+.form-check-input:checked {
+    background-color: #7B78E5; 
+}
+
+.form-check-label {
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+.forgot-password {
+    font-size: 1rem;
+}
+
+.forgot-password a {
+    text-decoration: none;
+    color: white; /* Cor do link */
+}
+
+.forgot-password a:hover {
+    text-decoration: underline; /* Adicionando sublinhado ao passar o mouse */
+}
+
 
 .check-label {
     color: white;
