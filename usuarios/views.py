@@ -35,11 +35,7 @@ def cadastro(request):
     if request.method == 'POST':
         form = CadastroForms(request.POST)
       
-        if form.is_valid():
-            if form["senha_cadastro"].value() != form["senha_cadastro_confirmacao"].value():
-                messages.warning(request, 'As senhas não coincidem!')
-                return render(request, 'usuarios/cadastro.html', {'form': form})
-            
+        if form.is_valid():            
             nome = form["nome_cadastro"].value()
             email = form["email_cadastro"].value()
             senha = form["senha_cadastro"].value()

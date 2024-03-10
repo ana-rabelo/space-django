@@ -77,3 +77,25 @@ class CadastroForms(forms.Form):
         )
     )
 
+    def clean_nome_cadastro(self):
+        nome = self.cleaned_data.get('nome_cadastro')
+        if len(nome) > 2:
+            nome = nome.strip()
+            if ' ' in nome:
+                raise forms.ValidationError('O nome de usuário não pode conter espaços')
+            else:
+                return nome 
+        else:
+            raise forms.ValidationError('O nome de usuário deve ter no mínimo 2 caracteres')
+        
+    def clean_senha_cadastro_confirmacao(self):
+        senha = self.cleaned_data.get('senha_cadastro')
+        senha_confirm = self.cleaned_data.get('senha_cadastro_confirmacao')
+        
+        if senha and senha_confirm:
+            print(senha, senha_confirm)
+            if senha != senha_confirm:
+                raise forms.ValidationError('As senhas não conferem')
+        else:
+            return senha_confirm
+

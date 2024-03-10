@@ -23,16 +23,21 @@
                 
                 <form action="{% url 'cadastro' %}" method="POST">
                     {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}" style="margin-top: 30px;">
-                    <p id="messages"> {{ message }}</p>
-                </div>
-                {% endfor %}
+                        <div class="form_alert" style="padding: 0px; margin-left: 0px;">
+                            <p id="messages"> {{ message }}</p>
+                        </div>
+                    {% endfor %}
                     {% csrf_token %} <!-- garantir a segurança das informações -->
                     <div class="row">
                         {% for field in form.visible_fields %}
                         <div class="col-12 col-lg-12">
                             <label for="{{ field.id_for_label }}" style="color:#D9D9D9; margin-top: 15px; margin-bottom: 10px;">{{ field.label }}</label>
                             {{ field }}
+                            {% for error in field.errors %}
+                            <div class="form_alert">
+                                {{error}}
+                            </div>
+                            {% endfor %}
                         </div>
                         {% endfor %}
                     </div>

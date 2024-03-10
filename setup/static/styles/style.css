@@ -673,3 +673,10 @@ table {
     font-weight: bold;
     color: #7B78E5 !important;
 }
+
+.form_alert {
+    margin-left: 10px;
+    margin-bottom: 0px; 
+    padding: 10px; 
+    color: #fc7a7a;
+}
