@@ -1,23 +1,41 @@
 import os
 import requests
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
 
 from galeria.models import Fotografia
 
 def index(request):
-    total_imagens_salvas = Fotografia.objects.count()
 
-    save_new_images(total_imagens_salvas) 
+    if not request.user.is_authenticated:
+        messages.warning(request, "Você precisa estar logado para acessar esta página.")
+        return redirect('login')
+
+    usuario = request.user
+
+    total_imagens_salvas = Fotografia.objects.filter(usuario=usuario).count()
+
+    save_new_images(total_imagens_salvas, usuario) 
    
-    fotografias = Fotografia.objects.order_by('data_criacao').filter(publicada=True) 
+    fotografias = Fotografia.objects.order_by('data_criacao').filter(usuario=usuario, publicada=True) 
 
     return render(request, 'galeria/index.html', {"cards": fotografias})
 
 def imagem(request, foto_id):
-    item = get_object_or_404(Fotografia, pk=foto_id)
+
+    if not request.user.is_authenticated:
+        messages.warning(request, "Você precisa estar logado para acessar esta página.")
+        return redirect('login')
+    
+    item = get_object_or_404(Fotografia, pk=foto_id, usuario=request.user)
     return render(request, 'galeria/imagem.html', {"item": item})
 
 def buscar(request):
+
+    if not request.user.is_authenticated:
+        messages.warning(request, "Você precisa estar logado para acessar esta página.")
+        return redirect('login')
+
     fotografias = Fotografia.objects.order_by('data_criacao').filter(publicada=True) 
 
     if "buscar" in request.GET:
@@ -26,18 +44,19 @@ def buscar(request):
 
     return render(request, 'galeria/buscar.html', {"cards": fotografias})
 
-def save_new_images(total_imagens_salvas):
+def save_new_images(total_imagens_salvas, user):
     """
     Busca novas imagens da API APOD da NASA e as salva no banco de dados.
 
     Args:
         total_imagens_salvas (int): O número total de imagens já salvas no banco de dados.
+        user (User): O usuário que está acessando a página.
 
     Returns:
         None
     """
 
-    if total_imagens_salvas < 16:
+    if total_imagens_salvas < 6:
         #captura de dados da API APOD da NASA
         api_url = "https://api.nasa.gov/planetary/apod"
         API_KEY = str(os.getenv('API_KEY'))
@@ -50,6 +69,7 @@ def save_new_images(total_imagens_salvas):
                 
         #salva os dados no banco de dados
         for item in dados:
+
             #verifica se a o objeto já foi salvo e se é uma imagem
             if not Fotografia.objects.filter(nome=item["title"]).exists() and item["media_type"] == "image":
                 titulo = item["title"]
@@ -84,8 +104,12 @@ def save_new_images(total_imagens_salvas):
                         #Se uma palavra-chave for encontrada, define a categoria e a busca é encerrada
                         break
 
-            #Salva a imagem no banco de dados
-            fotografia = Fotografia(nome=titulo, legenda=legenda, 
-                                    descricao=descricao, foto=foto, 
-                                    categoria=categoria, publicada=True)
-            fotografia.save()
+                #Salva a imagem no banco de dados
+                fotografia = Fotografia(nome=titulo, 
+                                    legenda=legenda, 
+                                    descricao=descricao, 
+                                    foto=foto, 
+                                    categoria=categoria, 
+                                    publicada=True, 
+                                    usuario=user)
+                fotografia.save()
