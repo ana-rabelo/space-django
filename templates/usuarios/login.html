@@ -44,11 +44,7 @@
                         <button type="submit" class="btn col-12 button_login " style="padding: top 5px; margin-top: 40px">Entrar</button>
                     </div>
                     
-                    {% for message in messages %}
-                        <div class="form_alert" style="text-align: center">
-                            <p id="messages"> {{ message }}</p>
-                        </div>
-                    {% endfor %}
+                    {% include '../partials/_alerts.html' %}
                 </form>
             </section>
         </main>

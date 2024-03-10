@@ -22,11 +22,7 @@
             <section class="galeria form_login" style="margin-left: 5em">                   
                 
                 <form action="{% url 'cadastro' %}" method="POST">
-                    {% for message in messages %}
-                        <div class="form_alert" style="padding: 0px; margin-left: 0px;">
-                            <p id="messages"> {{ message }}</p>
-                        </div>
-                    {% endfor %}
+                    {% include '../partials/_alerts.html' %}
                     {% csrf_token %} <!-- garantir a segurança das informações -->
                     <div class="row">
                         {% for field in form.visible_fields %}

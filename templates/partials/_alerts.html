@@ -1,0 +1,7 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="form_alert" style="padding: 0px; margin-left: 0px;">
+            <p id="messages"> {{ message }}</p>
+        </div>
+    {% endfor %}
+{% endif %}
