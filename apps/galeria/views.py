@@ -3,7 +3,7 @@ import requests
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 
-from galeria.models import Fotografia
+from apps.galeria.models import Fotografia
 
 def index(request):
 
