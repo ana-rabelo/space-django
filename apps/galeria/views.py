@@ -1,8 +1,10 @@
+from datetime import timezone
 import os
 import requests
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 
+from apps.galeria.forms import FotografiaForms
 from apps.galeria.models import Fotografia
 
 def index(request):
@@ -43,6 +45,30 @@ def buscar(request):
         fotografias = fotografias.filter(descricao__icontains=nome)
 
     return render(request, 'galeria/buscar.html', {"cards": fotografias})
+
+def nova_imagem(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Você precisa estar logado para acessar esta página.")
+        return redirect('login')
+    
+    form = FotografiaForms
+    
+    if request.method == "POST":
+        form = FotografiaForms(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.usuario = request.user
+            form.save()
+            messages.success(request, "Imagem salva com sucesso!")
+            return redirect('index')
+
+    return render(request, 'galeria/nova_imagem.html', {"form": form})
+
+def editar_imagem(request):
+    pass
+
+def deletar_imagem(request):
+    pass
 
 def save_new_images(total_imagens_salvas, user):
     """

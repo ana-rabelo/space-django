@@ -489,6 +489,11 @@ table {
     font-size: 1.1rem;
 }
 
+.clear { 
+    clear: both; 
+    height: 80px; 
+}
+
 .tags {
     padding: 1.5rem 0;
     display: flex;
@@ -727,4 +732,9 @@ table {
 .btn {
     font-size: 1rem;
     align-items: center;
+}
+
+.foto_input {
+    cursor:pointer;
+    color:white;
 }
