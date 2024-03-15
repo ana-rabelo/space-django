@@ -20,6 +20,7 @@
                 <a href="{% url 'index' %}" class="{% if request.path == '/' %}ativo{% endif %}"><img src="{% if request.path == '/' %}{% static '/assets/ícones/1x/Home - ativo.png' %}{% else %}{% static '/assets/ícones/1x/Home - inativo.png' %}{% endif %}"> Home</a>
                 <a href="#"><img src="{% if request.path == '/login' %}{% static '/assets/ícones/1x/Mais Vistas - ativo.png' %}{% else %}{% static '/assets/ícones/1x/Mais Vistas - inativo.png' %}{% endif %}"> Mais vistas</a>
                 <a href="#"><img src="{% if request.path == '/cadastro' %}{% static '/assets/ícones/1x/Novas - ativo.png' %}{% else %}{% static '/assets/ícones/1x/Novas - inativo.png' %}{% endif %}">Surpreenda-me</a>
+                <a href="#"><img height="32px" width="32px" src="{% static '/assets/ícones/1x/Adicionar imagem - inativo.png' %}">Nova imagem</a>
                 <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}">Sair</a>
                 {% else %}
                 <a href="{% url 'login' %}" class="{% if request.path == '/login' %}ativo{% endif %}"><img src="{% if request.path == '/login' %}{% static '/assets/ícones/1x/Mais Vistas - ativo.png' %}{% else %}{% static '/assets/ícones/1x/Mais Vistas - inativo.png' %}{% endif %}">Login</a>
