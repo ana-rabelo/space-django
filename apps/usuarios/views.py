@@ -6,6 +6,10 @@ from django.contrib.auth.models import User
 from django.contrib import auth, messages
 
 def login(request):
+
+    if request.user.is_authenticated:
+        return redirect('index')
+    
     form = LoginForms()
 
     if request.method == 'POST':
@@ -30,6 +34,10 @@ def login(request):
     return render(request, 'usuarios/login.html', {'form': form})
 
 def cadastro(request):
+    
+    if request.user.is_authenticated:
+        return redirect('index')
+    
     form = CadastroForms()
 
     if request.method == 'POST':

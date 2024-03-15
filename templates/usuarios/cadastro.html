@@ -1,10 +1,9 @@
-{% extends '../shared/base.html' %}
+{% extends 'shared/base.html' %}
 {% load static %}
 {% block content %}
             <section class="galeria form_login" style="margin-left: 5em">                   
-                
                 <form action="{% url 'cadastro' %}" method="POST">
-                    {% include '../partials/_alerts.html' %}
+                    {% include 'partials/_alerts.html' %}
                     {% csrf_token %} <!-- garantir a segurança das informações -->
                     <div class="row">
                         {% for field in form.visible_fields %}
