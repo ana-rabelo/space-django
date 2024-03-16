@@ -9,12 +9,12 @@
                 <section class="tags">
                     <p class="tags__titulo">Busque por tags:</p>
                     <ul class="tags__lista">
-                        <li class="tags__tag">Nebulosa</li>
-                        <li class="tags__tag">Estrela</li>
-                        <li class="tags__tag">Galáxia</li>
-                        <li class="tags__tag">Planeta</li>
+                        <li class="tags__tag"><a class="btn btn__tag" href="{% url 'filtro' 'NEBULOSA' %}">Nebulosa</a></li>
+                        <li class="tags__tag"><a class="btn btn__tag" href="{% url 'filtro' 'ESTRELA' %}">Estrela</a></li>
+                        <li class="tags__tag"><a class="btn btn__tag" href="{% url 'filtro' 'GALAXIA' %}">Galáxia</a></li>
+                        <li class="tags__tag"><a class="btn btn__tag" href="{% url 'filtro' 'PLANETA' %}">Planeta</a></li>
                     </ul>
-                </section>
+                </section>  
                 <section class="galeria">
                     <div class="cards">
                         <h2 class="cards__titulo">Navegue pela galeria</h2>
@@ -39,7 +39,7 @@
                             {% endfor %}
                             {% else %}
                             <div class="imagem__texto">
-                                <p>Galeria vazia</p>
+                                <p>Sem fotografias!</p>
                             </div>
                             {% endif %}
                         </ul>

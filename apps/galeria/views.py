@@ -33,18 +33,17 @@ def imagem(request, foto_id):
     return render(request, 'galeria/imagem.html', {"item": item})
 
 def buscar(request):
-
     if not request.user.is_authenticated:
         messages.warning(request, "Você precisa estar logado para acessar esta página.")
         return redirect('login')
 
-    fotografias = Fotografia.objects.order_by('data_criacao').filter(publicada=True) 
+    fotografias = Fotografia.objects.order_by('data_criacao').filter(usuario=request.user, publicada=True) 
 
     if "buscar" in request.GET:
         nome = request.GET["buscar"]
         fotografias = fotografias.filter(descricao__icontains=nome)
 
-    return render(request, 'galeria/buscar.html', {"cards": fotografias})
+    return render(request, 'galeria/index.html', {"cards": fotografias})
 
 def nova_imagem(request):
     if not request.user.is_authenticated:
@@ -92,6 +91,14 @@ def deletar_imagem(request, foto_id):
     messages.success(request, "Imagem deletada com sucesso!")
     
     return redirect('index')
+
+def tag_filtro(request, categoria):
+    if not request.user.is_authenticated:
+        messages.error(request, "Você precisa estar logado para acessar esta página.")
+        return redirect('login')
+
+    fotografias = Fotografia.objects.order_by('data_criacao').filter(usuario=request.user, publicada=True, categoria=categoria)
+    return render(request, 'galeria/index.html', {"cards": fotografias})
 
 def save_new_images(total_imagens_salvas, user):
     """
