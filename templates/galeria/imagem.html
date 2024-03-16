@@ -11,7 +11,7 @@
                             <div class="btns">
                                 <a href="{% url 'editar-imagem' item.id %}"><button class="btn-editar col-12">Editar</button>
                                 </a>
-                                <a href="{% url 'deletar-imagem' %}"><button class="btn-deletar col-12">Excluir</button>
+                                <a href="{% url 'deletar-imagem' item.id %}"><button class="btn-deletar col-12">Excluir</button>
                                 </a>
                             </div>
                             <div class="imagem__info">  

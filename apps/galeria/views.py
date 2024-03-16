@@ -82,9 +82,16 @@ def editar_imagem(request, foto_id):
 
     return render(request, 'galeria/editar_imagem.html', {"form": form, "foto_id": foto_id})
     
+def deletar_imagem(request, foto_id):
+    if not request.user.is_authenticated:
+        messages.error(request, "Você precisa estar logado para acessar esta página.")
+        return redirect('login')
 
-def deletar_imagem(request):
-    pass
+    fotografia = get_object_or_404(Fotografia, pk=foto_id, usuario=request.user)
+    fotografia.delete()
+    messages.success(request, "Imagem deletada com sucesso!")
+    
+    return redirect('index')
 
 def save_new_images(total_imagens_salvas, user):
     """
