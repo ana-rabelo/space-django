@@ -4,6 +4,9 @@ import requests
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 
+# Import Cloudinary
+import cloudinary.uploader
+
 from apps.galeria.forms import FotografiaForms
 from apps.galeria.models import Fotografia
 
@@ -169,3 +172,6 @@ def save_new_images(total_imagens_salvas, user):
                                     publicada=True, 
                                     usuario=user)
                 fotografia.save()
+
+                cloudinary.uploader.upload(foto,
+                             public_id=f"{fotografia.categoria}_{fotografia.id}")
