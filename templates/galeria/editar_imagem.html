@@ -1,0 +1,24 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+<section class="galeria form_login" style="margin-left: 5em">
+    <form action="{% url 'editar-imagem' foto_id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %} <!-- garantir a segurança das informações -->
+        <div class="row">
+            {% for field in form.visible_fields %}
+            <div class="col-12 col-lg-12">
+                <label for="{{ field.id_for_label }}" style="color:#D9D9D9; margin-top: 15px; margin-bottom: 10px;">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <button type="submit" class="btn col-12 button_login " style="padding: top 5px; margin-top: 40px">Atualizar</button>
+        </div>
+        {% include 'partials/_alerts.html' %}
+    </form>
+</section>
+</main>
+</div>
+</body>
+{% endblock %}

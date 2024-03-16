@@ -1,16 +1,25 @@
 {% extends 'shared/base.html' %}
 {% load static %}
-{% block content %}
-            <section class="conteudo">
+<section class="conteudo">
+                {% block content %}
                 {% if item %}  
                 <section class="imagem">
                     <div class="imagem__conteudo">
+                        {% include 'partials/_alerts.html' %}
                         <img class="imagem__imagem" src="{{ item.foto }}">
-                        <div class="imagem__info">  
-                            <div class="imagem__texto">
-                                <p class="imagem__titulo">{{ item.nome }}</p>
-                                <p class="imagem__descricao">{{ item.legenda }}</p>
-                                <p class="imagem__texto">{{ item.descricao }}</p>
+                        <div class="conteudo_texto">
+                            <div class="btns">
+                                <a href="{% url 'editar-imagem' item.id %}"><button class="btn-editar col-12">Editar</button>
+                                </a>
+                                <a href="{% url 'deletar-imagem' %}"><button class="btn-deletar col-12">Excluir</button>
+                                </a>
+                            </div>
+                            <div class="imagem__info">  
+                                <div class="imagem__texto">
+                                    <p class="imagem__titulo">{{ item.nome }}</p>
+                                    <p class="imagem__descricao">{{ item.legenda }}</p>
+                                    <p class="imagem__texto">{{ item.descricao }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>

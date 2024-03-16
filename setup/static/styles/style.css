@@ -3,7 +3,6 @@
    License: none (public domain)
 */
 
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -38,6 +37,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    box-sizing: border-box;
 }
 
 ol, ul {
@@ -367,12 +367,6 @@ table {
     justify-content: space-between;
     color: #FFFFFF;
     margin-top: 0.5rem;
-}
-
-.imagem__titulo {
-    font-weight: bold;
-    line-height: 2rem;
-    color: #FFFFFF;
 }
 
 .imagem__texto {
@@ -737,4 +731,40 @@ table {
 .foto_input {
     cursor:pointer;
     color:white;
+}
+
+.btn-editar,
+.btn-deletar {
+    display: inline-block;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #C98CF1,#7B78E5);
+    margin: 4px;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-editar:hover,
+.btn-deletar:hover {
+    background: linear-gradient(45deg, #9064ad,#5956a5)
+}
+
+.btns {
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    position: relative;
+    float: right;
+}
+
+.imagem__titulo {
+    font-weight: bold;
+    line-height: 2rem;
+    color: #FFFFFF;
+    position: relative;
 }

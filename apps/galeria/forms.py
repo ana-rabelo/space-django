@@ -16,8 +16,7 @@ class FotografiaForms(forms.ModelForm):
             'legenda': forms.TextInput(attrs={'class': 'form-control input__login'}),
             'categoria': forms.Select(attrs={'class': 'form-control input__login'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control input__login'}),
-            'foto': forms.FileInput(attrs={'class': 'form-control input__login foto_input',
-                                           'accept': 'image/*'}),
+            'foto': forms.URLInput(attrs={'class': 'form-control input__login'},),
             'data_criacao': forms.DateInput(
                 format='%d-%m-%Y',
                 attrs={

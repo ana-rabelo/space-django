@@ -64,8 +64,24 @@ def nova_imagem(request):
 
     return render(request, 'galeria/nova_imagem.html', {"form": form})
 
-def editar_imagem(request):
-    pass
+def editar_imagem(request, foto_id):
+
+    if not request.user.is_authenticated:
+        messages.error(request, "Você precisa estar logado para acessar esta página.")
+        return redirect('login')
+
+    fotografia = get_object_or_404(Fotografia, pk=foto_id, usuario=request.user)
+    form = FotografiaForms(instance=fotografia)
+
+    if request.method == "POST":
+        form = FotografiaForms(request.POST, request.FILES, instance=fotografia)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Imagem editada com sucesso!")
+            return redirect('imagem', foto_id=foto_id)
+
+    return render(request, 'galeria/editar_imagem.html', {"form": form, "foto_id": foto_id})
+    
 
 def deletar_imagem(request):
     pass
@@ -82,7 +98,7 @@ def save_new_images(total_imagens_salvas, user):
         None
     """
 
-    if total_imagens_salvas < 6:
+    if total_imagens_salvas < 7:
         #captura de dados da API APOD da NASA
         api_url = "https://api.nasa.gov/planetary/apod"
         API_KEY = str(os.getenv('API_KEY'))
