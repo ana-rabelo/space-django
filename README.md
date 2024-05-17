@@ -1,8 +1,8 @@
-# Alura Space Project
+#  Alura Space Project ![draw line of Saturn planet ](https://github.com/ana-rabelo/space-django/blob/main/static/assets/favicon/Favicon%2048px%201.png)
 
 ## Description
 
-This is a project developed during the Alura course. It's a space-themed website that showcases the latest news, images, and information about space exploration. The website utilizes the APOD (Astronomy Picture of the Day) API from NASA.
+This is a project developed during the Alura course. It's a space-themed website that showcases the latest images, and information about space exploration. The website utilizes the APOD (Astronomy Picture of the Day) API from NASA.
 
  
 ## Downloading the Project
