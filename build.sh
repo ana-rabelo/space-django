@@ -4,12 +4,15 @@
 set -e
 
 # Navigate to the project directory
-cd space-django
+# cd space-django
 # Install dependencies using Poetry (if you're using Poetry)
 # poetry install
 
 # Activate the virtual environment (if you're using a virtual environment)
 # source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
 
 # Apply database migrations
 python manage.py migrate
