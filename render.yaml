@@ -1,0 +1,22 @@
+databases:
+  - name: spacedjangodb
+    plan: free
+    databaseName: spacedjango
+    user: spacedjango
+
+services:
+  - type: web
+    plan: free
+    name: spacedjango
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn setup.asgi:application -k uvicorn.workers.UvicornWorker"    
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: spacedjangodb
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
