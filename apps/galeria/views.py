@@ -120,7 +120,7 @@ def save_new_images(total_imagens_salvas, user):
         api_url = "https://api.nasa.gov/planetary/apod"
         API_KEY = str(os.getenv('API_KEY'))
         #count = 6 para garantir que sempre teremos 6 imagens na galeria
-        params = {"api_key": API_KEY, 
+        params = {"api_key": 'DEMO_KEY', 
                   "count": 6}
         response = requests.get(api_url, params=params)
 
@@ -132,7 +132,6 @@ def save_new_images(total_imagens_salvas, user):
             #verifica se a o objeto já foi salvo e se é uma imagem
             if not Fotografia.objects.filter(nome=item["title"]).exists() and item["media_type"] == "image":
                 titulo = item["title"]
-                #
                 legenda = f"{item.get('copyright', 'Desconhecido')} / {item['date']}"
                 descricao = item["explanation"]
                 foto = item['url']
@@ -173,5 +172,5 @@ def save_new_images(total_imagens_salvas, user):
                                     usuario=user)
                 fotografia.save()
 
-                cloudinary.uploader.upload(foto,
-                             public_id=f"{fotografia.categoria}_{fotografia.id}")
+                """ cloudinary.uploader.upload(foto,
+                             public_id=f"{fotografia.categoria}_{fotografia.id}") """
