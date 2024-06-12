@@ -31,8 +31,8 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['anarabelo.pythonanywhere.com', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://anarabelo.pythonanywhere.com']
+ALLOWED_HOSTS = ['spacedjango.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://spacedjango.onrender.com']
 
 # Application definition
 
